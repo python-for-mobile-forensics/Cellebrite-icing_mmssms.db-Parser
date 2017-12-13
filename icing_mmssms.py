@@ -35,11 +35,11 @@ for fs in ds.FileSystems:
 				#Checks the byte location for sent to see if it is a 2 and set the value for sent or Inbox		
 				in_out = hexlify(message[19])
 				if in_out == '02':
-					pa.Role.Value = PartyRole.From
-					newSms.Folder.Value = "Inbox"
-				else:
 					pa.Role.Value = PartyRole.To
 					newSms.Folder.Value = "Sent"
+				else:
+					pa.Role.Value = PartyRole.From
+					newSms.Folder.Value = "Inbox"
 				# uses regular expression search for the phone number/date/time,body
 				# the expression puts each part in a groups so we can add them to the table
 				dateMessage = re.search('''(\d+)(\x01[\x00-\xff]{5})(.*)''',message[19:])
